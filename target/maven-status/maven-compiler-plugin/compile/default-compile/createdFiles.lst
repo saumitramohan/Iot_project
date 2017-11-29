@@ -1,0 +1,9 @@
+sample/data/jpa/domain/MetricsWrapper.class
+sample/data/jpa/web/MainController.class
+sample/data/jpa/service/UserRepository.class
+sample/data/jpa/domain/HistoricalData.class
+sample/data/jpa/domain/JSONtoVitalsObjectMapper.class
+sample/data/jpa/service/MetricsRepository.class
+sample/data/jpa/domain/Metrics.class
+sample/data/jpa/Application.class
+sample/data/jpa/domain/User.class
