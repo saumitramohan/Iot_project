@@ -5,25 +5,25 @@ import java.util.Date;
 public class JSONtoVitalsObjectMapper {
 
 
-    private String temperature;
-    private String pulseRate;
-    private String spo2;
+    private Double temperature;
+    private Double pulseRate;
+    private Double spo2;
     private Date entryTimeStamp;
 
 
-    public void setPulseRate(String pulseRate) {
+    public void setPulseRate(Double pulseRate) {
         this.pulseRate = pulseRate;
     }
 
-    public String getPulseRate() {
+    public Double getPulseRate() {
         return pulseRate;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 
-    public String getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
@@ -36,11 +36,11 @@ public class JSONtoVitalsObjectMapper {
         return entryTimeStamp;
     }
 
-    public String getSpo2() {
+    public Double getSpo2() {
         return spo2;
     }
 
-    public void setSpo2(String spo2) {
+    public void setSpo2(Double spo2) {
         this.spo2 = spo2;
     }
 }

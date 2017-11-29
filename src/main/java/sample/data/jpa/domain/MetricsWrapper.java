@@ -6,23 +6,25 @@ import java.util.Date;
 public class MetricsWrapper {
 
 
-    public MetricsWrapper(Metrics metrics, Iterable <Metrics> data){
+    public MetricsWrapper(Metrics metrics, Iterable <Metrics> metricsObject, Iterable <MetricsMetadata> metricMetaObject){
+        for(MetricsMetadata  itr : metricMetaObject) {
+            if (metrics.getMetricType() == itr.getMetricType()) {
 
-        setMetricsName(metrics.getMetricType());
-        setMetricsUnit(metrics.getMetricType());
-        setMetricsValue(metrics.getMetricValue());
-        setNormalValue(metrics.getMetricType());
-        setThreshold(0);
-        setTimeStamp(metrics.getEntryTimeStamp());
-        setHistoricalDataPoints(data);
+                setMetricsName(itr.getDescription());
+                setMetricsUnit(itr.getMetricUnit());
+                setMetricsValue(metrics.getMetricValue());
+                setTimeStamp(metrics.getEntryTimeStamp());
+                setHistoricalDataPoints(metricsObject);
+                setHealthStatus(itr.getLowValue(),itr.getHighValue(),metrics.getMetricValue());
+            }
+        }
 
     }
     String metricsName;
-    String metricsValue;
+    Double metricsValue;
     String metricsUnit;
-    String normalValue;
     Date timeStamp;
-    int threshold;
+    String healthStatus;
 
     ArrayList<HistoricalData> hdPointsList = new ArrayList<>();
 
@@ -39,44 +41,46 @@ public class MetricsWrapper {
     }
 
     public void setMetricsUnit(String metricsUnit) {
-        if(metricsUnit.equalsIgnoreCase("Temperture")){
-            this.metricsUnit = "Degrees";
-        }
-        else
-            if(metricsUnit.equalsIgnoreCase("SPO2"))
-                this.metricsUnit="Percentage";
-        else
-            this.metricsUnit = "BPM";
+
+//        if(metricsUnit.equalsIgnoreCase("Temperture")){
+//            this.metricsUnit = "Degrees";
+        //}
+        //else
+            //if(metricsUnit.equalsIgnoreCase("SPO2"))
+                //this.metricsUnit="Percentage";
+        //else
+           // this.metricsUnit = "BPM";
+        this.metricsUnit = metricsUnit;
     }
 
-    public String getMetricsValue() {
+    public Double getMetricsValue() {
         return metricsValue;
     }
 
-    public void setMetricsValue(String metricsValue) {
+    public void setMetricsValue(Double metricsValue) {
         this.metricsValue = metricsValue;
     }
 
-    public String getNormalValue() {
-        return normalValue;
-    }
+    //public String getNormalValue() {
+       // return normalValue;
+    //}
 
-    public void setNormalValue(String metricType) {
-        if(metricType.equalsIgnoreCase("Temperature"))
-            this.normalValue = "97";
-        else if(metricType.equalsIgnoreCase("PulseRate"))
-            this.normalValue = "70";
-        else
-            this.normalValue = "98";
-    }
+    //public void setNormalValue(String metricType) {
+//        if(metricType.equalsIgnoreCase("Temperature"))
+//            this.normalValue = "97";
+//        else if(metricType.equalsIgnoreCase("PulseRate"))
+//            this.normalValue = "70";
+//        else
+//            this.normalValue = "98";
+//    }
 
-    public int getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(int threshold) {
-        this.threshold = threshold;
-    }
+//    public int getThreshold() {
+//        return threshold;
+//    }
+//
+//    public void setThreshold(int threshold) {
+//        this.threshold = threshold;
+//    }
 
     public Date getTimeStamp() {
         return timeStamp;
@@ -98,6 +102,17 @@ public class MetricsWrapper {
 
     public ArrayList<HistoricalData> getHistoricalDataPoints(){
         return hdPointsList;
+    }
+
+    public void setHealthStatus(Double lowValue, Double highValue, Double value) {
+        if(value <= highValue && value>=lowValue)
+            this.healthStatus = "Good";
+        else
+            this.healthStatus = "NotGood";
+    }
+
+    public String getHealthStatus() {
+        return healthStatus;
     }
 
 }

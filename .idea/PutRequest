@@ -1,0 +1,10 @@
+
+localhost:8080/device/device2/Metric
+
+{
+	"temperature":"111",
+	"spo2":"111",
+	"pulseRate":"111",
+	"entryTimeStamp":"2017-04-30T18:25:43.511Z"
+
+}

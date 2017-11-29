@@ -16,10 +16,10 @@ public class Metrics {
     private String deviceid;
 
     @Column(name = "metrictype")
-    private String metricType;
+    private int metricType;
 
     @Column(name = "metricvalue")
-    private String metricValue;
+    private Double metricValue;
 
     @Column(name = "entrytimestamp")
     private Date entryTimeStamp;
@@ -41,19 +41,19 @@ public class Metrics {
         this.deviceid = deviceid;
     }
 
-    public String getMetricType() {
+    public int getMetricType() {
         return metricType;
     }
 
-    public void setMetricType(String metricType) {
+    public void setMetricType(int metricType) {
         this.metricType = metricType;
     }
 
-    public String getMetricValue() {
+    public Double getMetricValue() {
         return metricValue;
     }
 
-    public void setMetricValue(String metricValue) {
+    public void setMetricValue(Double metricValue) {
         this.metricValue = metricValue;
     }
 

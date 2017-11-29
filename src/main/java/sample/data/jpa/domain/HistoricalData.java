@@ -3,14 +3,14 @@ package sample.data.jpa.domain;
 import java.util.Date;
 
 public class HistoricalData {
-    String value;
+    Double value;
     Date timeStamp;
 
-    public String getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
