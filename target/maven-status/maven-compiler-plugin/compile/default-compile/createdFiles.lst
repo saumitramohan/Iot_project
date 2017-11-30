@@ -7,3 +7,4 @@ sample/data/jpa/domain/User.class
 sample/data/jpa/domain/MetricsWrapper.class
 sample/data/jpa/service/UserRepository.class
 sample/data/jpa/domain/JSONtoVitalsObjectMapper.class
+sample/data/jpa/domain/UserRequestBody.class

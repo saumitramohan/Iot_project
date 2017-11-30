@@ -1,6 +1,7 @@
 package sample.data.jpa.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
@@ -10,15 +11,23 @@ public class User {
 	private Integer id;
 
 	@Column (name = "fullname")
+	@NotNull
 	private String fullName;
 	@Column(name = "emailid")
+	@NotNull
 	private String emailId;
 	@Column(name = "deviceid")
+	@NotNull
 	private String deviceId;
+
 	@Column(name = "password")
+	@NotNull
 	private String password;
 	@Column(name = "userstatus")
 	private String userStatus;
+	@Column(name ="username")
+	@NotNull
+	private String username;
 
 
 
@@ -69,6 +78,13 @@ public class User {
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
 	}
-    
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }
 

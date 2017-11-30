@@ -27,19 +27,31 @@ public class MainController {
 	@Autowired
     private MetricsMetadataRepository metricsMetadataRepository;
 	
-	@GetMapping(path="/add") // Map ONLY GET Requests
-	public @ResponseBody String addNewUser (@RequestParam String fullName
-			, @RequestParam String emailId, @RequestParam String password, @RequestParam String deviceId) {
+//	@GetMapping(path="/add") // Map ONLY GET Requests
+    @RequestMapping(value="user/username/{username}",method =  {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+	public  ResponseEntity <User> addNewUser (@PathVariable("username") String username, @RequestBody(required = false) UserRequestBody userRequestObject) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
-		
-		User n = new User();
-		n.setName(fullName);
-		n.setPassword(password);
-		n.setEmail(emailId);
-		n.setDeviceid(deviceId);
-		userRepository.save(n);
-		return "Saved";
+        User user = new User();
+        if(userRequestObject!=null) {
+            user.setDeviceid(userRequestObject.getDeviceId());
+            user.setEmail(username);
+            user.setPassword(userRequestObject.getPassword());
+            user.setName(userRequestObject.getFullName());
+            user.setUsername(username);
+            userRepository.save(user);
+            return new ResponseEntity<User>(user,HttpStatus.OK);
+        }
+        else{
+		    User newuser =  userRepository.findAllByUsername(username);
+		    System.out.print(newuser.getId());
+		    return new ResponseEntity<User>(newuser,HttpStatus.OK);
+        }
+
+
+
+
 	}
 
     @RequestMapping(value ="/device/{deviceId}/metric", method = RequestMethod.PUT)
@@ -49,12 +61,14 @@ public class MainController {
         // get userid from device ID
         //Metrics metrics = metricsRepository.findAllByDeviceIdOrderByEntryTimeStamp(deviceId);
         // Construct method for metrics repository
+        ArrayList<Metrics> metricsArrayList = new ArrayList<>();
         Metrics metricsTemp = new Metrics();
         metricsTemp.setEntryTimeStamp(jvObject.getEntryTimeStamp());
         metricsTemp.setMetricType(1);   // Temperature
         metricsTemp.setMetricValue(jvObject.getTemperature());
         metricsTemp.setDeviceid(deviceId);
         metricsRepository.save(metricsTemp);
+        metricsArrayList.add(metricsTemp);
 
 
 
@@ -64,6 +78,8 @@ public class MainController {
         metricsPulse.setMetricValue(jvObject.getPulseRate());
         metricsPulse.setDeviceid(deviceId);
         metricsRepository.save(metricsPulse);
+        metricsArrayList.add(metricsPulse);
+
 
         Metrics metricsSPO2 = new Metrics();
         metricsSPO2.setEntryTimeStamp(jvObject.getEntryTimeStamp());
@@ -71,27 +87,29 @@ public class MainController {
         metricsSPO2.setMetricValue(jvObject.getSpo2());
         metricsSPO2.setDeviceid(deviceId);
         metricsRepository.save(metricsSPO2);
+        metricsArrayList.add(metricsSPO2);
 
-        return new ResponseEntity(HttpStatus.OK);
+
+        return new ResponseEntity(metricsArrayList,HttpStatus.OK);
     }
 	
-	@GetMapping(path="/all")
-	public @ResponseBody Iterable<User> getAllUsers() {
-		// This returns a JSON or XML with the users
-		return userRepository.findAll();
-	}
+//	@GetMapping(path="/all")
+//	public @ResponseBody Iterable<User> getAllUsers() {
+//		// This returns a JSON or XML with the users
+//		return userRepository.findAll();
+//	}
+//
+//	@GetMapping(path="/metrics/all")
+//	public @ResponseBody Iterable<Metrics> getAllMetrics(){
+//
+//		return metricsRepository.findAll();
+//	}
 
-	@GetMapping(path="/metrics/all")
-	public @ResponseBody Iterable<Metrics> getAllMetrics(){
-
-		return metricsRepository.findAll();
-	}
-
-    @RequestMapping (value ="/user/username/currentMetric/metric/{metricdesc}", method = RequestMethod.GET)
-    public @ResponseBody Iterable<MetricEntityWrapper> getIndividualMetrics(@PathVariable("metricdesc") String metricdesc){
+    @RequestMapping (value ="/user/username/currentMetric/metric/{metricdescription}", method = RequestMethod.GET)
+    public @ResponseBody Iterable<MetricEntityWrapper> getIndividualMetrics(@PathVariable("metricdescription") String metricdescription){
 	    // Temperature , spo2, PulseRate
         List <MetricEntityWrapper> MetricEntityWrapperList = new ArrayList<>();
-        MetricsMetadata metadataObject = metricsMetadataRepository.findAllByDescription(metricdesc);
+        MetricsMetadata metadataObject = metricsMetadataRepository.findAllByDescription(metricdescription);
         Iterable <Metrics> metrics = metricsRepository.findTop1000ByMetricTypeOrderByEntryTimeStampDesc(metadataObject.getMetricType());
         for(Metrics metric : metrics){
             MetricEntityWrapper meticEntityWrapperObject = new MetricEntityWrapper(metric,metadataObject);
