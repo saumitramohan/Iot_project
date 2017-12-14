@@ -1,6 +1,7 @@
 package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -54,18 +55,22 @@ public class MainController {
 
 	}
 
-    @RequestMapping(value ="/device/{deviceId}/metric", method = RequestMethod.PUT)
+    @RequestMapping(value ="/device/{deviceId}/metric/pulserate/{pulseRate}/temperature/{temperature}/spo2/{spo2}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity <JSONtoVitalsObjectMapper> addVitalsInformation(@PathVariable("deviceId") String deviceId, @RequestBody JSONtoVitalsObjectMapper jvObject){
+    public ResponseEntity <JSONtoVitalsObjectMapper> addVitalsInformation(@PathVariable("deviceId") String deviceId,
+                                                                          @PathVariable("pulseRate") Double pulseRate,
+                                                                          @PathVariable("temperature") Double temperature,
+                                                                          @PathVariable("spo2") Double spo2){
 	        // Now I have JV object .
         // get userid from device ID
         //Metrics metrics = metricsRepository.findAllByDeviceIdOrderByEntryTimeStamp(deviceId);
         // Construct method for metrics repository
+        Date entryTimeStamp = new Date();
         ArrayList<Metrics> metricsArrayList = new ArrayList<>();
         Metrics metricsTemp = new Metrics();
-        metricsTemp.setEntryTimeStamp(jvObject.getEntryTimeStamp());
+        metricsTemp.setEntryTimeStamp(entryTimeStamp);
         metricsTemp.setMetricType(1);   // Temperature
-        metricsTemp.setMetricValue(jvObject.getTemperature());
+        metricsTemp.setMetricValue(temperature);
         metricsTemp.setDeviceid(deviceId);
         metricsRepository.save(metricsTemp);
         metricsArrayList.add(metricsTemp);
@@ -73,18 +78,18 @@ public class MainController {
 
 
         Metrics metricsPulse = new Metrics();
-        metricsPulse.setEntryTimeStamp(jvObject.getEntryTimeStamp());
+        metricsPulse.setEntryTimeStamp(entryTimeStamp);
         metricsPulse.setMetricType(2);    // PulseRate
-        metricsPulse.setMetricValue(jvObject.getPulseRate());
+        metricsPulse.setMetricValue(pulseRate);
         metricsPulse.setDeviceid(deviceId);
         metricsRepository.save(metricsPulse);
         metricsArrayList.add(metricsPulse);
 
 
         Metrics metricsSPO2 = new Metrics();
-        metricsSPO2.setEntryTimeStamp(jvObject.getEntryTimeStamp());
+        metricsSPO2.setEntryTimeStamp(entryTimeStamp);
         metricsSPO2.setMetricType(3);       // SPO2
-        metricsSPO2.setMetricValue(jvObject.getSpo2());
+        metricsSPO2.setMetricValue(spo2);
         metricsSPO2.setDeviceid(deviceId);
         metricsRepository.save(metricsSPO2);
         metricsArrayList.add(metricsSPO2);
