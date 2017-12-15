@@ -12,6 +12,7 @@ public class MetricsWrapper implements Comparable <MetricsWrapper> {
 
     public MetricsWrapper(Metrics metrics, Iterable <Metrics> metricsObject, Iterable <MetricsMetadata> metricMetaObject){
         for(MetricsMetadata  itr : metricMetaObject) {
+
             if (metrics.getMetricType() == itr.getMetricType()) {
 
                 setMetricsName(itr.getDescription());

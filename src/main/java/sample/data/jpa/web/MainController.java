@@ -126,6 +126,7 @@ public class MainController {
 
     @RequestMapping(value="/user/username/currentmetric/{deviceid}", method = RequestMethod.GET)
     public @ResponseBody Iterable<MetricsWrapper> getUserHistoricalData(@PathVariable("deviceid") String deviceId){
+
 	    Iterable <Metrics> metrics = metricsRepository.findTop3ByDeviceidOrderByEntryTimeStampDesc(deviceId);
 	    List <MetricsWrapper> MetricsWrapperList = new ArrayList<>();
 	    Iterable <MetricsMetadata> metricsMetadata = metricsMetadataRepository.findAll();

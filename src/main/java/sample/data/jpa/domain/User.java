@@ -1,5 +1,8 @@
 package sample.data.jpa.domain;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +31,9 @@ public class User {
 	@Column(name ="username")
 	@NotNull
 	private String username;
+
+	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+
 
 
 
@@ -64,8 +70,13 @@ public class User {
 	}
 
 	public void setPassword(String password){
-		this.password = password;
+		this.password = PASSWORD_ENCODER.encode(password);
 	}
+
+	public String getPassword(){
+		return password ;
+	}
+
 
 	public String getUserStatus() {
 		if(this.userStatus == null ){
