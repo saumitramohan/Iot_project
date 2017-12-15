@@ -35,15 +35,9 @@ public class AmazonSESSample {
 
     static final String SUBJECT = "iCare Alerts";
 
-    static final String BODY = String.join(
-            System.getProperty("line.separator"),
-            "<h1>ALERT</h1>",
-            "<p>This email was sent from iCare application ",
-            "we have noticed some unusal chnage in your users vital",
-            ", please consult a doctor."
-    );
 
-    public void sendEmail(String emailId) throws UnsupportedEncodingException, AddressException {
+
+    public void sendEmail(String emailId, List<Double> alertValues) throws UnsupportedEncodingException, AddressException {
 
          String TO = emailId;
 
@@ -54,6 +48,26 @@ public class AmazonSESSample {
         props.put("mail.smtp.port", PORT);
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
+
+         String BODY = String.join(
+                System.getProperty("line.separator"),
+                "<h3>Hi User</h3>",
+                "<p>This email is sent from iCare developement team </p> ",
+                "<p>We are constantly monitoring your vitals and have noticed some unusual change users vitals ",
+                ", please consult a doctor. </p>",
+                 System.getProperty("line.separator"),
+
+                 "<h4>Vital signs :: </h4>" +
+                         System.getProperty("line.separator"),
+
+                 "<h4>Temperature :: </h4>" +alertValues.get(0).intValue() +
+
+                 "<h4>Heart Rate :: </h4>"  +alertValues.get(1).intValue() +
+
+                 "<h4> SPO2 level  :: </h4>" +alertValues.get(2).intValue()
+        );
+         //
+
 
         // Create a Session object to represent a mail session with the specified properties.
         Session session = Session.getDefaultInstance(props);

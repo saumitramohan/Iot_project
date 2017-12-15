@@ -40,8 +40,7 @@ import static org.springframework.http.HttpMethod.PUT;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(GET,"/user/username/{username}")
-                .antMatchers(POST,"/user/username/{username}")
+        web.ignoring().antMatchers(POST,"/user/username/{username}")
                 .antMatchers(PUT, "/device/{deviceId}/metric/pulserate/{pulseRate}/temperature/{temperature}/spo2/{spo2}");
     }
 }

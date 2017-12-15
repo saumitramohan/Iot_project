@@ -12,5 +12,5 @@ public interface MetricsRepository extends CrudRepository<Metrics, Long> {
     public Iterable <Metrics> findTop50ByMetricTypeOrderByEntryTimeStampDesc(int value);
     public Iterable<Metrics> findTop3ByDeviceidOrderByEntryTimeStampDesc(String value);
     public Iterable<Metrics> findTop1000ByMetricTypeOrderByEntryTimeStampDesc(int value);
-    public Iterable <Metrics> findTop10ByMetricTypeOrderByEntryTimeStampDesc(int value);
+
 }

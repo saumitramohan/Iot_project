@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {
         User findAllByUsername(String username);
-        User findUserByPassword(String password);
+        User findAllByDeviceId(String deviceId);
 
 }
