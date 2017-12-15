@@ -51,20 +51,20 @@ public class AmazonSESSample {
 
          String BODY = String.join(
                 System.getProperty("line.separator"),
-                "<h3>Hi User</h3>",
+                "Hi User,",
                 "<p>This email is sent from iCare developement team </p> ",
-                "<p>We are constantly monitoring your vitals and have noticed some unusual change users vitals ",
+                "<p>We are constantly monitoring  vitals and have noticed some unusual change users vitals ",
                 ", please consult a doctor. </p>",
                  System.getProperty("line.separator"),
 
-                 "<h4>Vital signs :: </h4>" +
+                 "Vital signs - <br>" +
                          System.getProperty("line.separator"),
 
-                 "<h4>Temperature :: </h4>" +alertValues.get(0).intValue() +
+                 "Temperature - " +alertValues.get(0).intValue() +
 
-                 "<h4>Heart Rate :: </h4>"  +alertValues.get(1).intValue() +
+                 "<br>Heart Rate - "  +alertValues.get(1).intValue() +
 
-                 "<h4> SPO2 level  :: </h4>" +alertValues.get(2).intValue()
+                 "<br>SPO2 level - " +alertValues.get(2).intValue()
         );
          //
 
@@ -90,6 +90,7 @@ public class AmazonSESSample {
             e.printStackTrace();
         }
         try {
+
             msg.setContent(BODY,"text/html");
         } catch (MessagingException e) {
             e.printStackTrace();

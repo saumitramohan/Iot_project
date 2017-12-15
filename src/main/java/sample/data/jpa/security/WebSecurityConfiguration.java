@@ -31,17 +31,15 @@ import static org.springframework.http.HttpMethod.PUT;
         protected void configure(HttpSecurity http) throws Exception {
 
             http.authorizeRequests()
-                    .anyRequest().authenticated()
-                    .and()
-                    .httpBasic()
+                    .anyRequest().permitAll()
                     .and()
                     .csrf().disable();
         }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(POST,"/user/username/{username}")
-                .antMatchers(PUT, "/device/{deviceId}/metric/pulserate/{pulseRate}/temperature/{temperature}/spo2/{spo2}");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers(POST,"/user/username/{username}")
+//                .antMatchers(PUT, "/device/{deviceId}/metric/pulserate/{pulseRate}/temperature/{temperature}/spo2/{spo2}");
+//    }
 }
 
