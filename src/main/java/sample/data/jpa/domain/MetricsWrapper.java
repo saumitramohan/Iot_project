@@ -89,6 +89,7 @@ public class MetricsWrapper implements Comparable <MetricsWrapper> {
     }
 
     public String getHealthStatus() {
+
         return healthStatus;
     }
 

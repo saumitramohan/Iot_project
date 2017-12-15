@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import sample.data.jpa.domain.DetailsService;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 
 @Component
@@ -38,7 +40,9 @@ import static org.springframework.http.HttpMethod.GET;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/user/username/currentMetric/metric/**");
+        web.ignoring().antMatchers(GET,"/user/username/{username}")
+                .antMatchers(POST,"/user/username/{username}")
+                .antMatchers(PUT, "/device/{deviceId}/metric/pulserate/{pulseRate}/temperature/{temperature}/spo2/{spo2}");
     }
 }
 

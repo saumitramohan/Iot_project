@@ -18,9 +18,4 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-//    @Bean(value = "datasource")
-//    @ConfigurationProperties("spring.datasource")
-//    public DataSource dataSource() {
-//        return DataSourceBuilder.create().build();
-//    }
 }
