@@ -1,5 +1,7 @@
 package sample.data.jpa.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,13 +60,13 @@ public class Metrics {
     }
 
     public Date getEntryTimeStamp() {
-        return entryTimeStamp;
+        return this.entryTimeStamp;
     }
 
     public void setEntryTimeStamp(Date entrytimestamp) {
         if (entrytimestamp == null) {
-            Calendar calendar = Calendar.getInstance();
-            this.entryTimeStamp = calendar.getTime();
+            Date date = new Date();
+            this.entryTimeStamp = date;
         } else {
             this.entryTimeStamp = entrytimestamp;
         }

@@ -3,8 +3,12 @@ package sample.data.jpa.domain;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MetricsWrapper {
+public class MetricsWrapper implements Comparable <MetricsWrapper> {
 
+    @Override
+    public int compareTo(MetricsWrapper o) {
+        return this.metricsName.compareTo(o.metricsName);
+    }
 
     public MetricsWrapper(Metrics metrics, Iterable <Metrics> metricsObject, Iterable <MetricsMetadata> metricMetaObject){
         for(MetricsMetadata  itr : metricMetaObject) {
@@ -42,14 +46,6 @@ public class MetricsWrapper {
 
     public void setMetricsUnit(String metricsUnit) {
 
-//        if(metricsUnit.equalsIgnoreCase("Temperture")){
-//            this.metricsUnit = "Degrees";
-        //}
-        //else
-            //if(metricsUnit.equalsIgnoreCase("SPO2"))
-                //this.metricsUnit="Percentage";
-        //else
-           // this.metricsUnit = "BPM";
         this.metricsUnit = metricsUnit;
     }
 
@@ -61,26 +57,6 @@ public class MetricsWrapper {
         this.metricsValue = metricsValue;
     }
 
-    //public String getNormalValue() {
-       // return normalValue;
-    //}
-
-    //public void setNormalValue(String metricType) {
-//        if(metricType.equalsIgnoreCase("Temperature"))
-//            this.normalValue = "97";
-//        else if(metricType.equalsIgnoreCase("PulseRate"))
-//            this.normalValue = "70";
-//        else
-//            this.normalValue = "98";
-//    }
-
-//    public int getThreshold() {
-//        return threshold;
-//    }
-//
-//    public void setThreshold(int threshold) {
-//        this.threshold = threshold;
-//    }
 
     public Date getTimeStamp() {
         return timeStamp;

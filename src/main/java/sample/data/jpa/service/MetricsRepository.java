@@ -9,10 +9,6 @@ import org.springframework.data.repository.*;
 // CRUD refers Create, Read, Update, Delete
 public interface MetricsRepository extends CrudRepository<Metrics, Long> {
 
-
-    //public Iterable <Metrics> findTop3ByDeviceIdOrderByEntryTimeStampDesc(String deviceId);
-//    public Iterable <Metrics> findTop3ByDeviceIdOrderByEntryTimeStampDesc(String deviceId);
-    //public Iterable <Metrics> findAllByDeviceId();
     public Iterable <Metrics> findTop50ByMetricTypeOrderByEntryTimeStampDesc(int value);
     public Iterable<Metrics> findTop3ByDeviceidOrderByEntryTimeStampDesc(String value);
     public Iterable<Metrics> findTop1000ByMetricTypeOrderByEntryTimeStampDesc(int value);

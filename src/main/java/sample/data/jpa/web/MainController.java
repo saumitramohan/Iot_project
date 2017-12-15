@@ -117,7 +117,7 @@ public class MainController {
         MetricsMetadata metadataObject = metricsMetadataRepository.findAllByDescription(metricdescription);
         Iterable <Metrics> metrics = metricsRepository.findTop1000ByMetricTypeOrderByEntryTimeStampDesc(metadataObject.getMetricType());
         for(Metrics metric : metrics){
-            MetricEntityWrapper meticEntityWrapperObject = new MetricEntityWrapper(metric,metadataObject);
+            MetricEntityWrapper meticEntityWrapperObject = new MetricEntityWrapper(metric, metadataObject);
             MetricEntityWrapperList.add(meticEntityWrapperObject);
 
         }
@@ -135,6 +135,7 @@ public class MainController {
 	        MetricsWrapper meticsWrapperObject = new MetricsWrapper(metric,historicalData,metricsMetadata);
             MetricsWrapperList.add(meticsWrapperObject);
         }
+        Collections.sort(MetricsWrapperList);
         return MetricsWrapperList;
     }
 }
