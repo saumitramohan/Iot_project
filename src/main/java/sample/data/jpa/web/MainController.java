@@ -58,6 +58,8 @@ public class MainController {
 
     }
 
+   // http://ec2-54-153-51-19.us-west-1.compute.amazonaws.com:8080/device/device2/metric/pulserate/0.00/temperature/97.03/spo2/0.00/
+
 
     @RequestMapping(value = "/device/{deviceId}/metric/pulserate/{pulseRate}/temperature/{temperature}/spo2/{spo2}", method = RequestMethod.PUT)
     @ResponseBody
@@ -69,12 +71,23 @@ public class MainController {
         // get userid from device ID
         //Metrics metrics = metricsRepository.findAllByDeviceIdOrderByEntryTimeStamp(deviceId);
         // Construct method for metrics repository
+        Double defaultTemp = 0.0;
+        Double defaultPulse = 0.0;
+        Double defaultSp = 0.0;
         Date entryTimeStamp = new Date();
         ArrayList<Metrics> metricsArrayList = new ArrayList<>();
         Metrics metricsTemp = new Metrics();
         metricsTemp.setEntryTimeStamp(entryTimeStamp);
         metricsTemp.setMetricType(1);   // Temperature
-        metricsTemp.setMetricValue(temperature);
+        if(temperature > 110.0 || temperature <90.0) {
+            defaultTemp = 98.3;
+            metricsTemp.setMetricValue(defaultTemp);
+
+        }
+        else{
+            metricsTemp.setMetricValue(temperature);
+
+        }
         metricsTemp.setDeviceid(deviceId);
         metricsRepository.save(metricsTemp);
         metricsArrayList.add(metricsTemp);
@@ -83,7 +96,13 @@ public class MainController {
         Metrics metricsPulse = new Metrics();
         metricsPulse.setEntryTimeStamp(entryTimeStamp);
         metricsPulse.setMetricType(2);    // PulseRate
-        metricsPulse.setMetricValue(pulseRate);
+        if(pulseRate > 190.0 || pulseRate <70.0) {
+            defaultPulse = 110.0;
+            metricsPulse.setMetricValue(defaultPulse);
+        }
+        else{
+            metricsPulse.setMetricValue(pulseRate);
+        }
         metricsPulse.setDeviceid(deviceId);
         metricsRepository.save(metricsPulse);
         metricsArrayList.add(metricsPulse);
@@ -92,7 +111,13 @@ public class MainController {
         Metrics metricsSPO2 = new Metrics();
         metricsSPO2.setEntryTimeStamp(entryTimeStamp);
         metricsSPO2.setMetricType(3);       // SPO2
-        metricsSPO2.setMetricValue(spo2);
+        if(spo2 > 100 || spo2 < 90) {
+            defaultSp = 96.7;
+            metricsSPO2.setMetricValue(defaultSp);
+        }
+        else{
+            metricsSPO2.setMetricValue(spo2);
+        }
         metricsSPO2.setDeviceid(deviceId);
         metricsRepository.save(metricsSPO2);
         metricsArrayList.add(metricsSPO2);
