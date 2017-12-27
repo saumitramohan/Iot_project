@@ -1,1 +1,1 @@
-# Iot_project
+# Backend Service for iCare prototype 
