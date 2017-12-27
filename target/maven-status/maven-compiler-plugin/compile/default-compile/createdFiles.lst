@@ -4,7 +4,11 @@ sample/data/jpa/service/MetricsRepository.class
 sample/data/jpa/domain/Metrics.class
 sample/data/jpa/Application.class
 sample/data/jpa/domain/User.class
+sample/data/jpa/emailService/AmazonSESSample.class
+sample/data/jpa/service/SendEmailAlert.class
+sample/data/jpa/domain/DetailsService.class
 sample/data/jpa/domain/MetricsWrapper.class
 sample/data/jpa/service/UserRepository.class
 sample/data/jpa/domain/JSONtoVitalsObjectMapper.class
 sample/data/jpa/domain/UserRequestBody.class
+sample/data/jpa/security/WebSecurityConfiguration.class

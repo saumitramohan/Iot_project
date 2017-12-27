@@ -1,9 +1,12 @@
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/service/MetricsRepository.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/domain/MetricEntityWrapper.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/domain/HistoricalData.java
+/Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/emailService/AmazonSESSample.java
+/Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/service/SendEmailAlert.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/service/MetricsMetadataRepository.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/domain/JSONtoVitalsObjectMapper.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/domain/Metrics.java
+/Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/domain/DetailsService.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/web/MainController.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/domain/UserRequestBody.java
 /Users/saumi/Downloads/spring-boot-master/spring-boot-samples/spring-boot-Iot-jpa/src/main/java/sample/data/jpa/domain/User.java
